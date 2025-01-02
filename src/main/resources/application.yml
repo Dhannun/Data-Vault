@@ -1,0 +1,55 @@
+server:
+  port: ${PORT:80}
+
+spring:
+  application:
+    name: books-data
+
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    database: postgresql
+
+  flyway:
+    baselineOnMigrate: true
+    enabled: true
+    user: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    baselineDescription: "init"
+    baselineVersion: 0
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+application:
+  security:
+    jwt:
+      secretKey: ${JWT_SECRET_KEY}
+      expiration: ${JWT_EXPIRY}
+      refresh-token:
+        expiration: ${REFRESH_TOKEN_EXPIRY}
+
+
+aws:
+  credentials:
+    accessKey: ${AWS_ACCESS_KEY_ID} # aws.credentials.accessKey
+    secretKey: ${AWS_SECRET_ACCESS_KEY} # aws.credentials.secretAccess
+  region: af-south-1
+  s3:
+    buckets:
+      bucket: ${BOOKS_BUCKET}
+      url: ${S3_BASE_URL}
+
+
+springdoc:
+  swagger-ui:
+    tagsSorter: alpha
+#    docExpansion: none
+
